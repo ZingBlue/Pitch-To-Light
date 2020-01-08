@@ -1,17 +1,23 @@
 import aubio
 import numpy
-from phue import Bridge
+from WifiBulb import WifiBulb
+# from phue import Bridge
 # import pyaudio This library hates me, I'll figure it out eventually
+# import flux-led This library is not used rn
 import wave
 
-b = Bridge('0.0.0.0') # The IP of the light bulb
+# import the class
+from WifiBulb import WifiBulb
 
-b.connect() # This only needs to run once, it connects the bulb
+# create a new object and assign it's IP address
+IP = "192.168.x.x"
+myLightBulb = WifiBulb(IP)
 
+# connect to the bulb
+myLightBulb.connect()
 
-"""
-arg is lamp number (if you have several lights I think)
-arg2 is the setting changed (in this case brightness)
-arg3 is the value 254 is maximum brightness, 0 is smalliest.
-"""
-b.set_light(1, 'bri', 254)
+# send it some colors
+myLightBulb.setColor((255, 0, 0))
+
+# disconnect when finished
+myLightBulb.disconnect()
