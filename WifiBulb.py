@@ -1,15 +1,15 @@
-﻿import socket
+import socket
 import sys
 import binascii
 # NOTE: THIS IS NOT MY CODE
 def getChecksumValue(byteArray):
-        """ returns the checksum value as a byte from an array of bytes """
+    """ returns the checksum value as a byte from an array of bytes """
         #sum all the values
-        sumOfValues = 0
-        for x in range(len(byteArray)):
-            sumOfValues += byteArray[x]
+    sumOfValues = 0
+    for x in range(len(byteArray)):
+        sumOfValues += byteArray[x]
         # return
-        return sumOfValues % pow(2, len(byteArray) + 1)
+    return sumOfValues % pow(2, len(byteArray) + 1)
 
 class WifiBulb(object):
     """class for controlling a wifi lightbulb"""
@@ -20,7 +20,7 @@ class WifiBulb(object):
     def __init__(self, IP):
         """ constructor with IP address """
         self.IP = IP
-        self.useDebug = False
+        self.useDebug = True
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self):
@@ -51,6 +51,7 @@ class WifiBulb(object):
     def disconnect(self):
         """ disconnects the socket """
         self.s.detach()
+        print ("disconnected from " + self.IP + ":" + str(WifiBulb.PORT))
 
     def warmwhite(self, brightness = 255):
         message = WifiBulb.mode + "000000" + format(brightness, "02x") + "0f0f"
@@ -60,11 +61,11 @@ class WifiBulb(object):
     #     data = "31ffc39200f00f" # 07 39 changes
     #     message = WifiBulb.mode + "ff39ff" + "00f00f"
     #     self._sendmessage(message)
-
+ 
     def setColor(self, color):
         """sets the color the given tuple in the format (R, G, B)"""
-        # print("Sending color: " + str(color))
-        # mode + red + green + blue + magicBytes + checksum
+        print("Sending color: " + str(color))
+        #mode + red + green + blue + magicBytes + checksum
         message = WifiBulb.mode + format(color[0], "02x") + format(color[1], "02x") + format(color[2], "02x") + WifiBulb.magicBytes
         self._sendmessage(message)
 
@@ -77,7 +78,7 @@ if __name__ == "__main__":
     # connect
     bulb.connect()
     # setColor
-    color = (int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+    color = (int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
     bulb.setColor(color)
     # disconnect
     bulb.disconnect()
