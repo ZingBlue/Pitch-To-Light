@@ -53,13 +53,14 @@ class WifiBulb(object):
         self.s.detach()
 
     def warmwhite(self, brightness = 255):
-        message = WifiBulb.mode + "000000" + format(brightness, "02x") + "0f0f"
+        message = WifiBulb.mode + "000000" + format(brightness, "02x") + "ff0000"
+        print(WifiBulb.mode + "000000" + format(brightness, "02x") + "0f0f")
         self._sendmessage(message)
-
-    # def nightlight(self, value):
-    #     data = "31ffc39200f00f" # 07 39 changes
-    #     message = WifiBulb.mode + "ff39ff" + "00f00f"
-    #     self._sendmessage(message)
+    
+    def nightlight(self, value):
+        data = "31ffc39200f00f" # 07 39 changes
+        message = WifiBulb.mode + "ff39ff" + "00f00f"
+        self._sendmessage(message)
 
     def setColor(self, color):
         """sets the color the given tuple in the format (R, G, B)"""
