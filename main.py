@@ -18,13 +18,13 @@ left = WifiBulb(IP_smort)
 # connect to the bulb
 left.connect()
 right.connect()
-time.sleep(5)
+# time.sleep(5) bad man
 # send it some colors
-left.setColor((0,0,0))
-right.setColor((0,225,0))
+left.setColor([0,0,50])
+right.setColor([0,225,0])
 time.sleep(5)
-left.warmwhite()
-time.sleep(5)
+#left.warmwhite()
+#time.sleep(5)
 #time.sleep(2)
 #Preset colors just yeah
 
