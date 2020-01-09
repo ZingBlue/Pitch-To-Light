@@ -1,6 +1,10 @@
-from flux_led import *
-import os
+from BulbLED import *
+#from flux_led import *
+#import os
 
-class __main__:
-    if __name__ == "__main__":
-        os.system("python -m flux_led 192.168.1.100 --on")
+def main():
+    b = BulbManagement()
+
+
+if __name__ == "__main__":
+    main()
